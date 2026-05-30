@@ -19,14 +19,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Gradle
+    # এই অফিশিয়াল অ্যাকশনটি নিজেই পুরো গ্র্যাডল এনভায়রনমেন্ট ও র‍্যাপার তৈরি করে নেবে
+    - name: Setup and Run Gradle Build
       uses: gradle/actions/setup-gradle@v3
-
-    - name: Change Permissions
-      run: chmod +x github || true
-
-    - name: Build Debug APK with Gradle
-      run: gradle assembleDebug
+      with:
+        arguments: assembleDebug
 
     - name: Upload APK Package
       uses: actions/upload-artifact@v4
