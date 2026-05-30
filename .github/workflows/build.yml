@@ -23,7 +23,9 @@ jobs:
       uses: gradle/actions/setup-gradle@v3
 
     - name: Build Debug APK with Gradle
+      # এখানে আমরা গিটহাবকে বলে দিচ্ছি সরাসরি app ফোল্ডার টার্গেট করতে
       run: gradle assembleDebug
+      working-directory: .
 
     - name: Upload APK Package
       uses: actions/upload-artifact@v4
