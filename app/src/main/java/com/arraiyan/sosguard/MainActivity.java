@@ -12,16 +12,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Location & Bluetooth permission handler
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.BLUETOOTH_CONNECT, android.Manifest.permission.BLUETOOTH_SCAN}, 1);
             }
         }
 
-        // Start Foreground Service for SOS
         Intent serviceIntent = new Intent(this, SOSBackgroundService.class);
-        serviceIntent.putExtra("emergency_number", "01704100288");
+        // এখানে অফিশিয়াল ইমার্জেন্সি নম্বর ৯৯৯ সেট করা হলো
+        serviceIntent.putExtra("emergency_number", "999");
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(serviceIntent);
@@ -30,6 +29,6 @@ public class MainActivity extends Activity {
         }
 
         Toast.makeText(this, "Ar Raiyan SOS Guard Activated Background Service", Toast.LENGTH_LONG).show();
-        finish(); // Closes the UI view immediately but keeps the app working in background
+        finish();
     }
 }
